@@ -42,7 +42,7 @@ n=50
 d=3
 pos=fsol.x +10**-4 * np.random.randn(n, d)
 
-samplerun = emcee.EnsembleSampler(50, 3, prob, args=(x, y, sigma_y))
+samplerun = emcee.EnsembleSampler(50, 3, prob, args=(x, y, sigma))
 samplerun.run_mcmc(pos, 4000)
 s=samplerun.get_chain()
 
@@ -66,10 +66,10 @@ plt.xlabel("Number of itretaions")
 plt.show()
 
 # Taking 50 burn in points
-samp = np.zeros([20000, 3])
-samp[:, 0] = s[50:4000, :, 0].reshape((20000))
-samp[:, 1] = s[50:4000, :, 1].reshape((20000))
-samp[:, 2] = s[50:4000, :, 2].reshape((20000))
+samp = np.zeros([197500, 3])
+samp[:, 0] = s[50:4000, :, 0].reshape((197500))
+samp[:, 1] = s[50:4000, :, 1].reshape((197500))
+samp[:, 2] = s[50:4000, :, 2].reshape((197500))
 medians = np.median(samp, axis=0)
 asol, bsol, csol = medians
 
@@ -83,7 +83,7 @@ xsol = np.linspace(np.min(x), np.max(x), 1000)
 ysol = asol*(xsol**2) + bsol*xsol + csol
 for i in np.random.randint(170000, size=100):
 	yd = samp[i, 0]*(xsol**2) + samp[i, 1]*xsol + samp[i, 2]
-	plt.plot(xsol, yd, 'r', label="Distribution")
+	plt.plot(xsol, yd, 'r')
 
 plt.plot(xsol, ysol, 'b', label="Fit")
 plt.legend()
