@@ -1,0 +1,2 @@
+Time taken by linear congruential random number generator=0.24837970733642578 sec
+Time taken by random.rand generator=0.008655071258544922 sec
